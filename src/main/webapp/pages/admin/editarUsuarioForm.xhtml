@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>           
+        </ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="id" value="#{usuarioController.idUsuario}"/>              
+                <f:viewAction action="#{usuarioController.cargarEditarUsuario()}"/>
+            </f:metadata>
+            <div class="row">
+                <div class="col-lg-12">  
+                    <h:form id="fNuevoUsuario">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Editar Usuario
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">                                    
+                                    <label for="activo">Activo:</label><br/>                        
+                                    <p:selectBooleanCheckbox id="activo" value="#{usuarioController.usuario.activo}"/>
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="login">Login</label>
+                                    <p:inputText placeholder="Login" id="login" value="#{usuarioController.usuario.login}"/>                       
+                                </div>
+                                <div class="col-lg-4">                        
+                                    <label for="nombre">Nombre</label>                        
+                                    <p:inputText placeholder="Nombre" id="nombre" value="#{usuarioController.persona.nombre}"/>
+                                </div>
+                                <div class="col-lg-4">                        
+                                    <label for="apellidos">Apellidos</label>                        
+                                    <p:inputText placeholder="Apellidos" id="apellidos" value="#{usuarioController.persona.apellidos}"/>
+                                </div>
+                            </div>
+                                   
+                            <div class="row">                                
+                                <div class="col-lg-12">                        
+                                    <label for="email">Email</label>                        
+                                    <p:inputText placeholder="email" id="email" value="#{usuarioController.persona.email}"/>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p:outputLabel value="Permisos:"/>     
+                                    <p:autoComplete id="permisos" multiple="true" 
+                                                    value="#{usuarioController.permisos}" 
+                                                    completeMethod="#{usuarioController.completeRol}"
+                                                    var="_rol" itemLabel="#{_rol.nombre}" itemValue="#{_rol}" converter="rolConverter" forceSelection="true">
+                                        <p:column style="width:80%">
+                                            <h:outputText value="#{_rol.nombre}" />
+                                        </p:column>
+                                    </p:autoComplete>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <p:commandButton value="Guardar" actionListener="#{usuarioController.modificarUsuario()}" update="growl"/> 
+                        </div>
+                    </div>
+                    </h:form>
+                </div>                
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="km.software.agendago.db" v="2.6.3" persistenceUnitName="agendaPU" sm="false" xs="false" id="_147916972634081" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity name="Tarea" lbl-ref="_147917013511882" xre="false" compositePrimaryKeyClass="TareaPK" abs="false" class="Tarea" visibile="true" minimized="false" rootElement="_147916972634081" id="_1479170135117">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fechaInicial" id="_147917016642884">
+                <jpa:bv>
+                    <jpa:nn/>
+                </jpa:bv>
+                <jpa:column name="tar_fecha_inicial" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="descripcion" id="_147917028892985">
+                <jpa:bv>
+                    <jpa:nn/>
+                </jpa:bv>
+                <jpa:column name="tar_descripcion" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fechaFinal" id="_147921016978899">
+                <jpa:bv/>
+                <jpa:column name="tar_fecha_final" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fechaCreacion" id="_147960477817069">
+                <jpa:bv/>
+                <jpa:column name="tar_fecha_creacion" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fechaAviso" id="_148050253715923">
+                <jpa:bv/>
+                <jpa:column name="tar_fecha_aviso" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479181849457" visibile="true" name="proyecto" id="_147918193875890">
+                <jpa:join-column name="PROYECTO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="creador" id="_1479210284486101">
+                <jpa:join-column name="CREADOR_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479575084676" visibile="true" name="estado" id="_147957518131633">
+                <jpa:join-column name="ESTADO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147917013511882">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Tarea.findAll">
+            <jpa:query>Select e from Tarea e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByFechaInicial">
+            <jpa:query>Select t from Tarea t where t.fechaInicial=:fechaInicial</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByDescripcion">
+            <jpa:query>Select t from Tarea t where t.descripcion=:descripcion</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByFechaFinal">
+            <jpa:query>Select t from Tarea t where t.fechaFinal=:fechaFinal</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByFechaCreacion">
+            <jpa:query>Select t from Tarea t where t.fechaCreacion=:fechaCreacion</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Tarea.findByEstadoID">
+            <jpa:query>Select e from Tarea e where e.estado.id = :estadoID</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByProcedimiento">
+            <jpa:query>Select t from Tarea t where t.procedimiento=:procedimiento</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByFechaFinalizacion">
+            <jpa:query>Select t from Tarea t where t.fechaFinalizacion=:fechaFinalizacion</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Tarea.findSinFinalizarByUsuario">
+            <jpa:query>Select e.tarea from Responsable e where e.tarea.estado.nombre != 'FINALIZADA' and e.usuario.login = :login</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByFechaAviso">
+            <jpa:query>Select t from Tarea t where t.fechaAviso=:fechaAviso</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Tarea.findAllByResponsable">
+            <jpa:query>Select e.tarea from Responsable e where e.usuario.id = :usuarioId</jpa:query>
+        </jpa:nq>
+        <jpa:table name="tarea"/>
+    </jpa:entity>
+    <jpa:entity name="Proyecto" lbl-ref="_147918184945786" xre="false" compositePrimaryKeyClass="ProyectoPK" abs="false" class="Proyecto" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479181849457">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_147918190918288">
+                <jpa:bv/>
+                <jpa:column name="proy_nombre" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147918184945786">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Proyecto.findAll">
+            <jpa:query>Select e from Proyecto e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Proyecto.findByNombre">
+            <jpa:query>Select p from Proyecto p where p.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:table name="proyecto"/>
+    </jpa:entity>
+    <jpa:entity name="Persona" lbl-ref="_147918726742091" xre="false" compositePrimaryKeyClass="PersonaPK" abs="false" class="Persona" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479187267253">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_147921007192396">
+                <jpa:bv/>
+                <jpa:column name="per_nombre" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="apellidos" id="_147921007862897">
+                <jpa:bv/>
+                <jpa:column name="per_apellidos" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="email" id="_147921008875698">
+                <jpa:bv/>
+                <jpa:column name="per_email" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147918726742091">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Persona.findAll">
+            <jpa:query>Select e from Persona e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Persona.findByNombre">
+            <jpa:query>Select p from Persona p where p.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Persona.findByApellidos">
+            <jpa:query>Select p from Persona p where p.apellidos=:apellidos</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Persona.findByEmail">
+            <jpa:query>Select p from Persona p where p.email=:email</jpa:query>
+        </jpa:nq>
+        <jpa:table name="persona"/>
+    </jpa:entity>
+    <jpa:entity name="Responsable" lbl-ref="_147918735997793" xre="false" compositePrimaryKeyClass="ResponsablePK" abs="false" class="Responsable" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479187359976">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479170135117" visibile="true" name="tarea" id="_147918738679595">
+                <jpa:join-column name="TAREA_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="usuario" id="_147964596395017">
+                <jpa:join-column name="USUARIO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147918735997793">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Responsable.findAll">
+            <jpa:query>Select e from Responsable e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Responsable.findByTarea">
+            <jpa:query>Select e from Responsable e where e.tarea.id = :tareaID</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Responsable.findUsuariosByTarea">
+            <jpa:query>Select e.usuario from Responsable e where e.tarea.id = :tareaID</jpa:query>
+        </jpa:nq>
+        <jpa:table name="responsable"/>
+    </jpa:entity>
+    <jpa:entity name="Usuario" lbl-ref="_1479187954768177" xre="false" compositePrimaryKeyClass="UsuarioPK" abs="false" class="Usuario" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479187954767">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="password" id="_1479188089533259">
+                <jpa:bv/>
+                <jpa:column name="usr_password" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="login" id="_1479188099357260">
+                <jpa:bv/>
+                <jpa:column name="usr_login" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="boolean" visibile="true" name="activo" id="_1479188104853261">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187267253" visibile="true" name="persona" id="_1479210342695102">
+                <jpa:join-column name="PERSONA_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_1479187954768177">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Usuario.findAll">
+            <jpa:query>Select e from Usuario e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByPassword">
+            <jpa:query>Select u from Usuario u where u.password=:password</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Usuario.findByLogin">
+            <jpa:query>Select u from Usuario u where u.login=:login</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByActivo">
+            <jpa:query>Select u from Usuario u where u.activo=:activo</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Usuario.findByID">
+            <jpa:query>Select e from Usuario e where e.id = :ID</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Usuario.findByEmail">
+            <jpa:query>Select u from Usuario u where u.email=:email</jpa:query>
+        </jpa:nq>
+        <jpa:table name="sec_usuario"/>
+    </jpa:entity>
+    <jpa:entity name="Rol" lbl-ref="_1479188193257262" xre="false" compositePrimaryKeyClass="RolPK" abs="false" class="Rol" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479188193256">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_147920994807595">
+                <jpa:bv/>
+                <jpa:column name="rol_nombre" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_1479188193257262">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Rol.findAll">
+            <jpa:query>Select e from Rol e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Rol.findByNombre">
+            <jpa:query>Select r from Rol r where r.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:table name="sec_rol"/>
+    </jpa:entity>
+    <jpa:entity name="Permiso" lbl-ref="_147920963780990" xre="false" compositePrimaryKeyClass="PermisoPK" abs="false" class="Permiso" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479209637807">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="usuario" id="_147920969753892">
+                <jpa:join-column name="USUARIO_USR_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479188193256" visibile="true" name="rol" id="_147920986824394">
+                <jpa:join-column name="ROL_ROL_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147920963780990">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Permiso.findAll">
+            <jpa:query>Select e from Permiso e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Permiso.findByUsuarioAndRol">
+            <jpa:query>Select e from Permiso e where e.usuario.id = :usuarioID and e.rol.id = :rolID </jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Permiso.findAllByUsuario">
+            <jpa:query>Select e from Permiso e where e.usuario.id = :usuarioID</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Permiso.findAllRolesByUsuario">
+            <jpa:query>Select e.rol from Permiso e where e.usuario.id = :usuarioID</jpa:query>
+        </jpa:nq>
+        <jpa:table name="sec_permiso"/>
+    </jpa:entity>
+    <jpa:entity lbl-ref="_147957508468229" xre="false" compositePrimaryKeyClass="EstadoTareaPK" abs="false" class="EstadoTarea" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479575084676">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_147957513012431">
+                <jpa:bv/>
+                <jpa:column name="estado_nombre" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147957508468229">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="EstadoTarea.findAll">
+            <jpa:query>Select e from EstadoTarea e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="EstadoTarea.findByNombre">
+            <jpa:query>Select e from EstadoTarea e where e.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:table name="estado_tarea"/>
+    </jpa:entity>
+    <jpa:entity name="Historial" lbl-ref="_147985636535121" xre="false" compositePrimaryKeyClass="HistorialPK" abs="false" class="Historial" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1479856365347">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fecha" id="_147985668116445">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="observacion" id="_147985679532646">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479170135117" visibile="true" name="tarea" id="_147985655929942">
+                <jpa:join-column name="TAREA_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479575084676" visibile="true" name="estado" id="_147985661606843">
+                <jpa:join-column name="ESTADO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="usuario" id="_147985665021344">
+                <jpa:join-column name="USUARIO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_147985636535121">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Historial.findAll">
+            <jpa:query>Select e from Historial e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Historial.findByFecha">
+            <jpa:query>Select h from Historial h where h.fecha=:fecha</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Historial.findByObservacion">
+            <jpa:query>Select h from Historial h where h.observacion=:observacion</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Historial.findByTarea">
+            <jpa:query>Select e from Historial e where e.tarea.id = :tareaID</jpa:query>
+        </jpa:nq>
+        <jpa:table name="historial"/>
+    </jpa:entity>
+    <jpa:entity name="Archivo" lbl-ref="_148044338855921" xre="false" compositePrimaryKeyClass="ArchivoPK" abs="false" class="Archivo" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1480443388552">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_148044358224123">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="extension" id="_148044358904024">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148044338855921">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Archivo.findAll">
+            <jpa:query>Select e from Archivo e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Archivo.findByNombre">
+            <jpa:query>Select a from Archivo a where a.nombre=:nombre</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Archivo.findByExtension">
+            <jpa:query>Select a from Archivo a where a.extension=:extension</jpa:query>
+        </jpa:nq>
+        <jpa:table name="archivo"/>
+    </jpa:entity>
+    <jpa:entity name="ArchivoHistorial" lbl-ref="_148050300203424" xre="false" compositePrimaryKeyClass="ArchivoHistorialPK" abs="false" class="ArchivoHistorial" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1480503002031">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479856365347" visibile="true" name="historial" id="_148050308423226">
+                <jpa:join-column name="HISTORIAL_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1480443388552" visibile="true" name="archivo" id="_148050311268927">
+                <jpa:join-column name="ARCHIVO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148050300203424">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="ArchivoHistorial.findAll">
+            <jpa:query>Select e from ArchivoHistorial e</jpa:query>
+        </jpa:nq>
+        <jpa:table name="archivo_historial"/>
+    </jpa:entity>
+    <jpa:entity name="ArchivoTarea" lbl-ref="_148052354456025" xre="false" compositePrimaryKeyClass="ArchivoTareaPK" abs="false" class="ArchivoTarea" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1480523544554">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fecha" id="_148052481551430">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479170135117" visibile="true" name="tarea" id="_148052380746427">
+                <jpa:join-column name="TAREA_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1480443388552" visibile="true" name="archivo" id="_148052385305528">
+                <jpa:join-column name="ARCHIVO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="usuario" id="_148052479042829">
+                <jpa:join-column name="USUARIO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148052354456025">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="ArchivoTarea.findAll">
+            <jpa:query>Select e from ArchivoTarea e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="ArchivoTarea.findByFecha">
+            <jpa:query>Select a from ArchivoTarea a where a.fecha=:fecha</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="ArchivoTarea.findAllByTarea">
+            <jpa:query>Select e from ArchivoTarea e where e.tarea.id = :tareaID</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity name="Observacion" lbl-ref="_148233987250229" xre="false" compositePrimaryKeyClass="ObservacionPK" abs="false" class="Observacion" visibile="true" gen="false" minimized="false" rootElement="_147916972634081" id="_1482339872487">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="texto" id="_148233994878531">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" visibile="true" name="fecha" id="_148234004146534">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479170135117" visibile="true" name="tarea" id="_148233998412232">
+                <jpa:join-column name="TAREA_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479187954767" visibile="true" name="usuario" id="_148234001621833">
+                <jpa:join-column name="USUARIO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148233987250229">
+                <jpa:bv/>
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Observacion.findAll">
+            <jpa:query>Select e from Observacion e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Observacion.findByTexto">
+            <jpa:query>Select o from Observacion o where o.texto=:texto</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Observacion.findByFecha">
+            <jpa:query>Select o from Observacion o where o.fecha=:fecha</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Observacion.findByTarea">
+            <jpa:query>Select e from Observacion e where e.tarea.id = :tareaID</jpa:query>
+        </jpa:nq>
+        <jpa:table name="observacion"/>
+    </jpa:entity>
+    <jpa:snp e="true" loc="BEFORE_PACKAGE">/**
+ * This file was generated by the JPA Modeler
+ */</jpa:snp>
+    <jpa:c/>
+    <jpa:diagram>
+        <plane elementRef="_147916972634081">
+            <shape elementRef="_1479170135117">
+                <Bounds x="332.0" y="139.0" width="140.0" height="238.0"/>
+            </shape>
+            <shape elementRef="_1479181849457">
+                <Bounds x="245.0" y="23.0" width="159.0" height="86.0"/>
+            </shape>
+            <shape elementRef="_1479187267253">
+                <Bounds x="-60.0" y="-7.0" width="155.0" height="126.0"/>
+            </shape>
+            <shape elementRef="_1479187359976">
+                <Bounds x="557.0" y="3.0" width="188.0" height="106.0"/>
+            </shape>
+            <shape elementRef="_1479187954767">
+                <Bounds x="126.0" y="139.0" width="151.0" height="158.0"/>
+            </shape>
+            <shape elementRef="_1479188193256">
+                <Bounds x="-73.0" y="422.0" width="128.0" height="86.0"/>
+            </shape>
+            <shape elementRef="_1479209637807">
+                <Bounds x="-85.0" y="226.0" width="153.0" height="106.0"/>
+            </shape>
+            <shape elementRef="_1479575084676">
+                <Bounds x="-60.0" y="679.0" width="186.0" height="86.0"/>
+            </shape>
+            <shape elementRef="_1479856365347">
+                <Bounds x="155.0" y="439.0" width="156.0" height="178.0"/>
+            </shape>
+            <shape elementRef="_1480443388552">
+                <Bounds x="380.0" y="496.0" width="147.0" height="106.0"/>
+            </shape>
+            <shape elementRef="_1480503002031">
+                <Bounds x="431.0" y="659.0" width="207.0" height="106.0"/>
+            </shape>
+            <shape elementRef="_1480523544554">
+                <Bounds x="557.0" y="174.0" width="188.0" height="158.0"/>
+            </shape>
+            <shape elementRef="_1482339872487">
+                <Bounds x="611.0" y="365.0" width="184.0" height="158.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>

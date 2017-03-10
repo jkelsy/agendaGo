@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="agendaPU" transaction-type="JTA">
+    <jta-data-source>java:/jboss/datasources/AgendaDS</jta-data-source>
+    <class>km.software.agendago.db.Tarea</class>
+    <class>km.software.agendago.db.Proyecto</class>
+    <class>km.software.agendago.db.Persona</class>
+    <class>km.software.agendago.db.Responsable</class>
+    <class>km.software.agendago.db.Usuario</class>
+    <class>km.software.agendago.db.Rol</class>
+    <class>km.software.agendago.db.Permiso</class>
+    <class>km.software.agendago.db.EstadoTarea</class>
+    <class>km.software.agendago.db.HistoricoEstadoTarea</class>
+    <class>km.software.agendago.db.Archivo</class>
+    <class>km.software.agendago.db.Historial</class>
+    <class>km.software.agendago.db.ArchivoHistorial</class>
+    <class>km.software.agendago.db.ArchivoTarea</class>
+    <class>km.software.agendago.db.Observacion</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+    </properties>
+  </persistence-unit>
+</persistence>

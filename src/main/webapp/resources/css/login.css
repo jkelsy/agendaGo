@@ -1,0 +1,18 @@
+body{
+    
+    background-color: white;
+}
+
+.modal-dialog {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    z-index: 10040;
+    overflow: auto;
+    overflow-y: auto;
+}
+
+#loginErrorMsg{
+    color: white;
+    background-color: #269abc;
+}

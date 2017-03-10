@@ -1,0 +1,41 @@
+
+agregar en el standalone lo que esta entre estas etiquetas
+<!--Para grabas archivos -->
+
+
+y crear en el servidor una carpeta en la siguiente ruta
+/home/files
+desde el navegador : 0.0.0.0:xxxx/archivos
+
+/*********************************************
+
+ <subsystem xmlns="urn:jboss:domain:undertow:3.1">
+            <buffer-cache name="default"/>
+            <server name="default-server">
+                <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true"/>
+                <https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"/>
+                <host name="default-host" alias="localhost">
+                    <location name="/" handler="welcome-content"/>
+                    
+                    <!--Para grabas archivos -->
+                    <location name="/archivos" handler="archivos"/>
+                    <!--Para grabas archivos -->
+                    
+                    <filter-ref name="server-header"/>
+                    <filter-ref name="x-powered-by-header"/>
+                </host>
+            </server>
+            <servlet-container name="default">
+                <jsp-config/>
+                <websockets/>
+            </servlet-container>
+            <handlers>
+                <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
+                
+                <!--Para grabas archivos -->
+                <file name="archivos" path="/home/files" directory-listing="true"/>
+                <!--Para grabas archivos -->
+                
+            </handlers>
+
+/*********************************************

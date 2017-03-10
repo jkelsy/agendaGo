@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>           
+        </ui:define>
+        <ui:define name="content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h:form id="fListUsuario">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Usuarios 
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-2" style="margin-bottom: 5px;" >
+                                    <p:button outcome="/pages/admin/nuevoUsuarioForm" value="Nuevo Usuario" icon="fa fa-user" />                                    
+                                </div>                                
+                            </div>                            
+                            <p:dataTable value="#{usuario.findAll()}" var="usr" id="tablaUsuarios" widgetVar="tablaUsuarios">
+                                <p:column headerText="Login">
+                                    #{usr.getLogin()}
+                                </p:column>
+                                <p:column headerText="Nombre">
+                                    #{usr.getPersona().getNombre()}
+                                </p:column>
+                                <p:column headerText="Apellidos">
+                                    #{usr.getPersona().getApellidos()}
+                                </p:column>
+                                <p:column headerText="Email">
+                                    #{usr.getPersona().getEmail()}
+                                </p:column>
+                                <p:column headerText="Permisos">
+                                    <ui:repeat value="#{usuarioController.findAllPermisosByUsuario(usr)}" var="per">
+                                        #{per.rol.nombre} , 
+                                    </ui:repeat>                                    
+                                </p:column>
+                                <p:column headerText="...">
+                                    <p:commandButton action="#{usuarioController.seleccionarUsuario(usr)}" value="Editar"/>
+                                </p:column>
+                                <p:column headerText="...">                                  
+                                    <p:commandButton action="#{usuarioController.cambiarPassword(usr)}" value="Cambiar Password"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </div>      
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

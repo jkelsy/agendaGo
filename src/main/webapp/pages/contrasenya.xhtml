@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>           
+        </ui:define>
+        <ui:define name="content">            
+            <div class="row">
+                <div class="col-lg-12">  
+                    <h:form id="fNuevoUsuario">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Cambiar Contraseña
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="login">Contraseña Actual</label>
+                                    <p:password value="#{usuarioController.actual}"/>                       
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="login">Nueva Contraseña</label>
+                                    <p:password value="#{usuarioController.password}"/>                       
+                                </div>                                
+                                <div class="col-lg-4">                        
+                                    <label for="apellidos">Confirmar Nueva Contraseña</label>                        
+                                    <p:password value="#{usuarioController.confirmar}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <p:commandButton value="Guardar" actionListener="#{usuarioController.cambiarContrasenyaActual()}" update="growl"/> 
+                        </div>
+                    </div>
+                    </h:form>
+                </div>                
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

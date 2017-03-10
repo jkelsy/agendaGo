@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>            
+        </ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="id" value="#{tareaController.idTarea}"/>              
+                <f:viewAction action="#{tareaController.cargarVerTarea()}"/>
+            </f:metadata>
+            <div class="row">
+                <div class="col-lg-12">     
+                    <h:form id="fArchivoTarea" enctype="multipart/form-data">
+                    <p:growl id="messages" showDetail="true" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Ver Tarea
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>Descripción</dt>
+                                        <dd>#{tareaController.tarea.descripcion}</dd>
+                                        
+                                        <dt>Estado</dt>
+                                        <dd>#{tareaController.tarea.estado.nombre}</dd>
+                                        
+                                        <dt>Fecha Inicial</dt>
+                                        <dd>#{tareaController.tarea.fechaInicial}</dd>
+                                        
+                                        <dt>Fecha Aviso</dt>
+                                        <dd>#{tareaController.tarea.fechaAviso}</dd>
+                                        
+                                        <dt>Fecha Final</dt>
+                                        <dd>#{tareaController.tarea.fechaFinal}</dd>                                   
+                                        
+                                        <dt>Responsables</dt>
+                                        <dd>
+                                            <ui:repeat value="#{tareaController.responsables}" var="_responsable">
+                                                #{_responsable.login},
+                                            </ui:repeat>
+                                        </dd>
+                                        <dt>Archivos</dt>
+                                        <dd>
+                                            <ui:repeat value="#{tareaController.archivos}" var="_archivoTarea">                                        
+                                                <p:link target="_blank" href="http://localhost:8080/archivos/agendaGo/#{_archivoTarea.archivo.nombre}">#{_archivoTarea.archivo.nombre}</p:link>, 
+                                            </ui:repeat>
+                                        </dd>
+                                        
+                                        <dt>Observaciones</dt>
+                                        <dd>
+                                            <ui:repeat value="#{tareaController.observaciones}" var="_observacion">
+                                                <hr/>
+                                                <b>
+                                                    <h:outputText value="#{_observacion.fecha}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                        </h:outputText>
+                                                    #{_observacion.usuario.login} :</b>
+                                                <br/>
+                                                #{_observacion.texto} 
+                                            </ui:repeat> 
+                                        </dd>
+                                    </dl>                                   
+                                </div>                    
+                            </div>
+                            
+                        </div>
+                        <div class="panel-footer">
+                            
+                        </div>
+                    </div>
+                    </h:form>
+                </div>               
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

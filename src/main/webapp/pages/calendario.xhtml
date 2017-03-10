@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="calendario.css"/>
+        </ui:define>
+        <ui:define name="content">           
+            <div class="row">
+                <div class="col-lg-12">                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Calendario
+                            </div>
+                        </div>
+                        <div class="panel-body">                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p:schedule value="#{calendarioBean.eventModel}" timeZone="GMT+2">
+                                        <p:ajax event="eventSelect" listener="#{calendarioBean.onEventSelect}"/>
+                                    </p:schedule>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            
+                        </div>
+                    </div>                         
+                </div>               
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

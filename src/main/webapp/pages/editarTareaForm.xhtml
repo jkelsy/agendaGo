@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>            
+        </ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="id" value="#{tareaController.idTarea}"/>              
+                <f:viewAction action="#{tareaController.cargarEditarTarea()}"/>
+            </f:metadata>
+            <div class="row">
+                <div class="col-lg-12">     
+                    <h:form id="fNuevaTarea">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Editar Tarea
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="descripcion">Descripcion</label>
+                                    <p:inputTextarea value="#{tareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion"/>                       
+                                </div>                    
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">                        
+                                    <label for="fechaInicial">Fecha Inicial</label>
+                                    <p:calendar value="#{tareaController.tarea.fechaInicial}" placeholder="Fecha Inicial" id="fechaInicial"  />                                </div>
+                                <div class="col-lg-4">                        
+                                    <label for="fechaAviso">Fecha Aviso</label>
+                                    <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso"/>
+                                </div>
+                                <div class="col-lg-4">                        
+                                    <label for="fechaFinal">Fecha Final</label>                        
+                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p:outputLabel value="Responsables:"/>     
+                                    <p:autoComplete id="responsables" multiple="true" 
+                                                    value="#{tareaController.responsables}" 
+                                                    completeMethod="#{tareaController.completeUsuario}"
+                                                    var="usr" itemLabel="#{usr.login}" itemValue="#{usr}" converter="usuarioConverter" forceSelection="true">
+                                        <p:column style="width:80%">
+                                            <h:outputText value="#{usr.login}" />
+                                        </p:column>
+                                    </p:autoComplete>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <p:commandButton action="#{tareaController.editarTarea()}" value="Guardar"/> 
+                        </div>
+                    </div>
+                    </h:form>        
+                </div>               
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

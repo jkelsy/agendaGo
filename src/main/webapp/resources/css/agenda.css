@@ -1,0 +1,19 @@
+.ACTIVA{
+    background-color: green;
+    border: solid orange 1px;
+}
+
+.ALERTA{
+    background-color: orange;
+    border: solid orange 1px;
+}
+
+.VENCIDA{
+    background-color: red;
+    border: solid orange 1px;
+}
+
+.FINALIZADA{
+    background-color: gray;
+    border: solid orange 1px;
+}

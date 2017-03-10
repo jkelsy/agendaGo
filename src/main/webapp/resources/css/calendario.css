@@ -1,0 +1,27 @@
+.ACTIVA{
+    background-color: green;
+    border: solid orange 1px;
+}
+
+.VENCIDA{
+    background-color: red;
+    border: solid orange 1px;
+}
+
+
+.FINALIZADA .fc-event,
+.FINALIZADA a,
+.FINALIZADA .fc-event-inner{
+   background-color: red;
+   border-color: red;
+   color: orange;
+  
+}
+
+.ALERTA .fc-event,
+.ALERTA a,
+.ALERTA .fc-event-inner{
+   background-color: red;
+   border-color: red;
+   color: orange;
+}

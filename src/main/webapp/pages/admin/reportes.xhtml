@@ -1,0 +1,123 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>
+            <h:outputStylesheet library="css" name="agenda.css"/>
+        </ui:define>
+        <ui:define name="content">            
+             <f:metadata>                
+                <f:viewAction action="#{reporteController.cargar()}"/>
+            </f:metadata>
+            <div class="row">                
+                <div class="col-lg-12">
+                    <h:form id="fListTarea">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Reportes                               
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Responsable</label>
+                                    <p:selectOneMenu value="#{reporteController.usuarioSeleccionado}">
+                                        <f:selectItem itemValue="#{null}" itemLabel=""/>
+                                        <f:selectItems value="#{reporteController.usuarios}" itemValue="#{_usuario}" itemLabel="#{_usuario.login}" var="_usuario" />
+                                        <o:converter converterId="omnifaces.SelectItemsConverter" list="#{reporteController.usuarios}" />
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Estado</label>
+                                    <p:selectOneMenu value="#{reporteController.estadoSeleccionado}">
+                                        <f:selectItem itemValue="#{null}" itemLabel=""/>
+                                        <f:selectItems value="#{reporteController.estados}" itemLabel="#{_estado.nombre}" var="_estado" />
+                                        <o:converter converterId="omnifaces.SelectItemsConverter" list="#{reporteController.estados}" />
+                                    </p:selectOneMenu>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label>.</label>
+                                    <h:panelGrid>
+                                        <p:commandButton action="#{reporteController.buscar}" value="Buscar" icon="fa fa-search" update="fListTarea" />
+                                     
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p:dataTable value="#{reporteController.tareas}" var="_tarea" id="tablaTareas">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Fecha Creacion" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.fechaCreacion}" />                                            
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Creado Por" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.creador.login}" />                                            
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descripcion" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.descripcion}" />                                            
+                                        </p:column>
+                                        
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Fecha Aviso" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.fechaAviso}" />                                            
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Fecha Final" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.fechaFinal}" />                                            
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Estado" />
+                                            </f:facet>
+                                            <h:outputText value="#{_tarea.estado.nombre}" />                                            
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Responsables" />
+                                            </f:facet>
+                                            <h:outputText value="#{agendaFacade.findStringResponsablesByTarea(_tarea.id)}" /> 
+                                        </p:column>
+                                        <p:column headerText="Descripcion">
+                                            
+                                            <p:commandButton action="#{agendaController.verTarea(_tarea)}" value="Detalles" />                                            
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p:commandButton value="Exportar as PDF" ajax="false" >
+                                        <p:dataExporter type="pdf" target="tablaTareas" fileName="tareas"/>
+                                    </p:commandButton>
+                                    <p:commandButton value="Exportar as Excel" ajax="false" >
+                                        <p:dataExporter type="xls" target="tablaTareas" fileName="tareas"/>
+                                    </p:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

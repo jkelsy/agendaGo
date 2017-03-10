@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="header">
+            <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css"/>
+            <h:outputStylesheet library="css" name="sb-admin-2.css"/>           
+        </ui:define>
+        <ui:define name="content">   
+            <f:metadata>
+                <f:viewParam name="id" value="#{finalizarTareaController.idTarea}"/>              
+                <f:viewAction action="#{finalizarTareaController.cargar()}"  />
+            </f:metadata>
+
+            <div class="row">
+                <div class="col-lg-12">     
+                    <h:form id="fNuevaTarea">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Finalizar Tarea
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="descripcion">Descripcion</label>
+                                    <p:inputTextarea value="#{finalizarTareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion" disabled="true" />                       
+                                </div>                    
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">                        
+                                    <label for="fechaInicial">Fecha Inicial</label>
+                                    <p:calendar value="#{finalizarTareaController.tarea.fechaInicial}" placeholder="Fecha Inicial" id="fechaInicial" disabled="true" />                        
+
+                                </div>
+                                <div class="col-lg-6">                        
+                                    <label for="fechaFinal">Fecha Final</label>                        
+                                    <p:calendar value="#{finalizarTareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal" disabled="true"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="procedimiento">Procedimiento</label>
+                                    <p:inputTextarea value="#{finalizarTareaController.observacion}" placeholder="Procedimiento" id="procedimiento"/>                       
+                                </div>                    
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">  
+                                    <p:commandButton value="Finalizar" action="#{finalizarTareaController.finalizar()}"/> 
+                                                   
+                                </div>                    
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            
+                        </div>
+                    </div>
+                    </h:form>        
+                </div>                
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

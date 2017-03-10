@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+  <h:form>
+    <h:link outcome="/pages/main" style="float:left">
+      <h:graphicImage name="images/logo.png" alt="logo" height="48px" style="margin-right:10px"/>
+    </h:link>
+    <span style="font-size:2em;color:#777777;height:48px;vertical-align:middle;display:table-cell;">
+        <h:outputText value="AgendaGo" />
+    </span>
+    <p:toolbar style="margin-top:5px">
+      <f:facet name="left">
+        <p:button outcome="/pages/main" value="Listado Tareas" icon="fa fa-server" />
+        <p:button outcome="/pages/nuevaTareaForm" value="Nueva Tarea" icon="fa fa-calendar"/>
+        <p:button outcome="/pages/calendario" value="Calendario" icon="fa fa-calendar"/>
+        <p:button outcome="/pages/contrasenya" value="Cambiar Contraseña" icon="fa fa-password"/>
+        <p:button outcome="/pages/admin/usuarioList" value="Usuarios" icon="fa fa-user" rendered="#{request.isUserInRole('ADMIN')}"/>   
+        <p:button outcome="/pages/admin/reportes" value="Reportes" icon="fa fa-bar-chart-o" rendered="#{request.isUserInRole('ADMIN')}"/> 
+      </f:facet>
+      <f:facet name="right">
+          <h:outputLabel value="#{request.remoteUser}"/> 
+          <p:commandButton value="Salir!" action="#{loginBean.logout()}" ajax="false"/>
+      </f:facet>
+    </p:toolbar>
+  </h:form>
+</ui:composition>
+</html>

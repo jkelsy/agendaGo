@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-shared-configuration>
+    <!--
+This file contains additional configuration written by modules in the NetBeans IDE.
+The configuration is intended to be shared among all the users of project and
+therefore it is assumed to be part of version control checkout.
+Without this configuration present, some functionality in the IDE may be limited or fail altogether.
+-->
+    <properties xmlns="http://www.netbeans.org/ns/maven-properties-data/1">
+        <!--
+Properties that influence various parts of the IDE, especially code formatting and the like. 
+You can copy and paste the single properties, into the pom.xml file and the IDE will pick them up.
+That way multiple projects can share the same settings (useful for formatting rules for example).
+Any value defined here will override the pom.xml file value but is only applicable to the current project.
+-->
+        <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>1.7-web</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_j2eeVersion>
+        <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>WildFly</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>
+        <org-netbeans-modules-projectapi.jsf_2e_language>Facelets</org-netbeans-modules-projectapi.jsf_2e_language>
+        <org-netbeans-jcode-javaee-generator.org_2e_netbeans_2e_jcode_2e_ejb_2e_facade_2e_SessionBeanData>rO0ABXNyAC1vcmcubmV0YmVhbnMuamNvZGUuZWpiLmZhY2FkZS5TZXNzaW9uQmVhbkRhdGFDrtHz3Lqq7QIAA0wACF9wYWNrYWdldAASTGphdmEvbGFuZy9TdHJpbmc7TAAKcHJlZml4TmFtZXEAfgABTAAKc3VmZml4TmFtZXEAfgABeHIANG9yZy5uZXRiZWFucy5qY29kZS5zdGFjay5jb25maWcuZGF0YS5MYXllckNvbmZpZ0RhdGE2w/zUZwrHNAIAAHhwdAAma20uc29mdHdhcmUuYWdlbmRhZ28uZGIuc2VydmljZS5mYWNhZGV0AAB0AAZGYWNhZGU=</org-netbeans-jcode-javaee-generator.org_2e_netbeans_2e_jcode_2e_ejb_2e_facade_2e_SessionBeanData>
+        <org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>ide</org-netbeans-modules-maven-jaxws.rest_2e_config_2e_type>
+        <org-netbeans-jcode-mvc.org_2e_netbeans_2e_jcode_2e_mvc_2e_controller_2e_MVCData>rO0ABXNyAClvcmcubmV0YmVhbnMuamNvZGUubXZjLmNvbnRyb2xsZXIuTVZDRGF0Ybk7NO93zyK7AgALWgAOYXV0aGVudGljYXRpb25aAA5iZWFuVmFsaWRhdGlvbloABGNzcmZaAAtoeWJyaWRDbGFzc1oAA3hzc0wACF9wYWNrYWdldAASTGphdmEvbGFuZy9TdHJpbmc7TAAKZXZlbnRUeXBlc3QAEExqYXZhL3V0aWwvTGlzdDtMAApwcmVmaXhOYW1lcQB+AAFMAA5yZXN0Q29uZmlnRGF0YXQAOkxvcmcvbmV0YmVhbnMvamNvZGUvcmVzdC9hcHBsaWNhdGlvbmNvbmZpZy9SZXN0Q29uZmlnRGF0YTtMAApyZXR1cm5UeXBldABDTG9yZy9uZXRiZWFucy9qY29kZS9tdmMvY29udHJvbGxlci9yZXR1cm50eXBlL0NvbnRyb2xsZXJSZXR1cm5UeXBlO0wACnN1ZmZpeE5hbWVxAH4AAXhyADRvcmcubmV0YmVhbnMuamNvZGUuc3RhY2suY29uZmlnLmRhdGEuTGF5ZXJDb25maWdEYXRhNsP81GcKxzQCAAB4cAABAAEAdAAia20uc29mdHdhcmUuYWdlbmRhZ28uZGIuY29udHJvbGxlcnNyABNqYXZhLnV0aWwuQXJyYXlMaXN0eIHSHZnHYZ0DAAFJAARzaXpleHAAAAAAdwQAAAAAeHQAAHNyADhvcmcubmV0YmVhbnMuamNvZGUucmVzdC5hcHBsaWNhdGlvbmNvbmZpZy5SZXN0Q29uZmlnRGF0YTXNcrIzc9qDAgAEWgAJdXNlSmVyc2V5TAAGX2NsYXNzcQB+AAFMAAhfcGFja2FnZXEAfgABTAAEcGF0aHEAfgABeHEAfgAFAHB0ACJrbS5zb2Z0d2FyZS5hZ2VuZGFnby5kYi5jb250cm9sbGVycH5yAEFvcmcubmV0YmVhbnMuamNvZGUubXZjLmNvbnRyb2xsZXIucmV0dXJudHlwZS5Db250cm9sbGVyUmV0dXJuVHlwZQAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5FbnVtAAAAAAAAAAASAAB4cHQABlNUUklOR3QACkNvbnRyb2xsZXI=</org-netbeans-jcode-mvc.org_2e_netbeans_2e_jcode_2e_mvc_2e_controller_2e_MVCData>
+    </properties>
+</project-shared-configuration>

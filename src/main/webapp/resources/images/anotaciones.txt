@@ -1,0 +1,5 @@
+
+para llamar a un reporte desde la aplicacion en reportserver
+http://localhost:8070/reportserver/reportserver/reportexport?key=solicitud&p_p_negociacion=4&format=pdf
+
+http://localhost:8070/reportserver/reportserver/httpauthexport?key=solicitud&user=inmuebles_vendedor&apikey=123456&format=pdf&download=true

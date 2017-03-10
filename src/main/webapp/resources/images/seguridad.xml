@@ -1,0 +1,17 @@
+
+<security-domain name="inmueblesGo-security-domain">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/jboss/datasources/InmueblesDS"/>
+            <module-option name="principalsQuery" value="select usr_password FROM sec_usuario WHERE usr_login=?"/>
+            <module-option name="rolesQuery" value="SELECT sec_rol.rol_nombre, 'Roles' FROM sec_usuario, sec_rol, sec_permiso WHERE sec_usuario.id = sec_permiso.usuario_usr_id AND sec_rol.id = sec_permiso.rol_rol_id AND sec_usuario.usr_login=?"/>
+        </login-module>
+    </authentication>
+    <authorization>
+        <policy-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/jboss/datasources/InmueblesDS"/>
+            <module-option name="principalsQuery" value="select usr_password FROM sec_usuario WHERE usr_login=?"/>
+            <module-option name="rolesQuery" value="SELECT sec_rol.rol_nombre, 'Roles' FROM sec_usuario, sec_rol, sec_permiso WHERE sec_usuario.id = sec_permiso.usuario_usr_id AND sec_rol.id = sec_permiso.rol_rol_id AND sec_usuario.usr_login=?"/>
+        </policy-module>
+    </authorization>
+</security-domain>
