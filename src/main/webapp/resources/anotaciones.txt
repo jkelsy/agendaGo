@@ -1,13 +1,53 @@
+configuracion standallone.xml
 
-<dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>hibernate-jpamodelgen-4.3.1.Final</artifactId>
-            <version>SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>   
+datasource:
+
+<datasource jta="true" jndi-name="java:/jboss/datasources/AgendaDS" pool-name="AgendaDS" enabled="true" use-ccm="true">
+    <connection-url>jdbc:mysql://localhost:3306/agendago</connection-url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <driver>mysql-connector-java-5.1.41-bin.jar_com.mysql.jdbc.Driver_5_1</driver>
+    <security>
+        <user-name>agendago</user-name>
+        <password>agendago</password>
+    </security>
+    <validation>
+        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+        <background-validation>true</background-validation>
+        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+    </validation>
+</datasource>
+
+
+security:
+
+<security-domain name="agendaGo-security-domain" cache-type="default">
+    <authentication>
+        <login-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/jboss/datasources/AgendaDS"/>
+            <module-option name="principalsQuery" value="SELECT usr_password FROM sec_usuario WHERE usr_login=? and activo=1"/>
+            <module-option name="rolesQuery" value="SELECT rol_nombre, 'Roles' FROM sec_rol, sec_permiso, sec_usuario WHERE  sec_rol.id = sec_permiso.rol_rol_id and sec_usuario.id = sec_permiso.usuario_usr_id and sec_usuario.usr_login=?"/>
+            <module-option name="hashAlgorithm" value="SHA-256"/>
+            <module-option name="hashEncoding" value="base64"/>
+        </login-module>
+    </authentication>
+    <authorization>
+        <policy-module code="Database" flag="required">
+            <module-option name="dsJndiName" value="java:/jboss/datasources/AgendaDS"/>
+            <module-option name="principalsQuery" value="SELECT usr_password FROM sec_usuario WHERE usr_login=? and activo=1"/>
+            <module-option name="rolesQuery" value="SELECT rol_nombre, 'Roles' FROM sec_rol, sec_permiso, sec_usuario WHERE  sec_rol.id = sec_permiso.rol_rol_id and sec_usuario.id = sec_permiso.usuario_usr_id and sec_usuario.usr_login=?"/>
+            <module-option name="hashAlgorithm" value="SHA-256"/>
+            <module-option name="hashEncoding" value="base64"/>
+        </policy-module>
+    </authorization>
+</security-domain>
+
+email:
+
+<outbound-socket-binding name="mail-smtp-agenda" source-port="0" fixed-source-port="false">
+    <remote-destination host="smtp.gmail.com" port="465"/>
+</outbound-socket-binding>
+
+<mail-session name="Agenda" jndi-name="java:jboss/mail/Agenda">
+    <smtp-server outbound-socket-binding-ref="mail-smtp-agenda" ssl="true" username="agendagoj2km@gmail.com" password="4g3nd4g0j2km"/>
+</mail-session>
+
