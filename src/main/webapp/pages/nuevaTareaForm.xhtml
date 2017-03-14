@@ -12,7 +12,7 @@
             
             <div class="row">
                 <div class="col-lg-12">     
-                    <h:form id="fNuevaTarea" enctype="multipart/form-data">
+                    <h:form id="fNuevaTarea">
                     <p:growl id="messages" showDetail="true" />
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -23,25 +23,33 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <label for="descripcion">Descripcion</label>
-                                    <p:inputTextarea value="#{tareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion"/>                       
+                                    <label for="nombre">Nombre</label>
+                                    <p:inputText value="#{tareaController.tarea.nombre}" placeholder="Nombre" id="nombre"/>                       
                                 </div>                    
                             </div>
+                            
                             <div class="row">
+                                <div class="col-lg-12">
+                                    <label for="descripcion">Descripcion</label>
+                                    <p:inputTextarea value="#{tareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion" rows="10"/>                       
+                                </div>                    
+                            </div>
+                            
+                            <div class="row"> 
                                 <div class="col-lg-4">                        
-                                    <label for="fechaInicial">Fecha Inicial</label>
-                                    <p:calendar value="#{tareaController.tarea.fechaInicial}" placeholder="Fecha Inicial" id="fechaInicial">
-                                        <p:ajax event="dateSelect" update="panelMeses"/>
+                                    <label for="fechaFinal">Fecha Agendada</label>                        
+                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal">
+                                        <p:ajax event="dateSelect" process="@this" update="panelFechaAviso panelMeses"/>
                                     </p:calendar>
                                 </div>
-                                <div class="col-lg-4">                        
-                                    <label for="fechaAviso">Fecha Aviso</label>
-                                    <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso"/>
-                                </div>
-                                <div class="col-lg-4">                        
-                                    <label for="fechaFinal">Fecha Final</label>                        
-                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal"/>
-                                </div>
+                                <div class="col-lg-4">  
+                                    <p:panelGrid id="panelFechaAviso">
+                                    <p:panelGrid rendered="${tareaController.tarea.fechaFinal != null}">
+                                        <label for="fechaAviso">Fecha Aviso</label>
+                                        <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso" maxdate="#{tareaController.tarea.fechaFinal}"/>
+                                    </p:panelGrid>
+                                    </p:panelGrid>
+                                </div>                                
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -60,62 +68,62 @@
                             <div>
                                 <div>
                                     <p:panelGrid columns="12" layout="grid" id="panelMeses">
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 0}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 0}">
                                             <h:outputText value="Enero: "/>
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[0]}"/>
                                         </p:panelGrid>                                       
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 1}">                                            
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 1}">                                            
                                             <h:outputText value="Febrero: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[1]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 2}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 2}">
                                             <h:outputText value="Marzo: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[2]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 3}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 3}">
                                             <h:outputText value="Abril: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[3]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 4}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 4}">
                                             <h:outputText value="Mayo: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[4]}" />
                                         </p:panelGrid>
                                     
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 5}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 5}">
                                             <h:outputText value="Junio: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[5]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 6}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 6}">
                                             <h:outputText value="Julio: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[6]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 7}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 7}">
                                             <h:outputText value="Agosto: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[7]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 8}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 8}">
                                             <h:outputText value="Septiembre: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[8]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 9}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 9}">
                                             <h:outputText value="Octubre: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[9]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 10}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 10}">
                                             <h:outputText value="Noviembre: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[10]}" />
                                         </p:panelGrid>
                                         
-                                        <p:panelGrid rendered="#{tareaController.tarea.fechaInicial.month lt 11}">
+                                        <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 11}">
                                             <h:outputText value="Diciembre: " />
                                             <p:selectBooleanCheckbox value="#{tareaController.meses[11]}" />
                                         </p:panelGrid>

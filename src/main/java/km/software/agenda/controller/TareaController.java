@@ -219,6 +219,7 @@ public class TareaController implements Serializable {
         Usuario creador = agendaService.getUsuarioActual(); 
         tarea.setCreador(creador);
         tarea.setFechaCreacion(hoy);
+        tarea.setFechaInicial(hoy);
         
         if(hoy.after(tarea.getFechaFinal())){
             tarea.setEstado(estadoVencida);

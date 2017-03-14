@@ -29,6 +29,10 @@
                 <jpa:bv/>
                 <jpa:column name="tar_fecha_aviso" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
             </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="nombre" id="_148944786631432">
+                <jpa:bv/>
+                <jpa:column name="tar_nombre" unique="false" nullable="true" insertable="true" updatable="true" length="255"/>
+            </jpa:basic>
             <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1479181849457" visibile="true" name="proyecto" id="_147918193875890">
                 <jpa:join-column name="PROYECTO_ID" rc="" unique="false" nullable="true" insertable="true" updatable="true" column-definition="" table=""/>
             </jpa:many-to-one>
@@ -75,6 +79,9 @@
         </jpa:nq>
         <jpa:nq e="true" name="Tarea.findAllByResponsable">
             <jpa:query>Select e.tarea from Responsable e where e.usuario.id = :usuarioId</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Tarea.findByNombre">
+            <jpa:query>Select t from Tarea t where t.nombre=:nombre</jpa:query>
         </jpa:nq>
         <jpa:table name="tarea"/>
     </jpa:entity>
@@ -443,7 +450,7 @@
     <jpa:diagram>
         <plane elementRef="_147916972634081">
             <shape elementRef="_1479170135117">
-                <Bounds x="332.0" y="139.0" width="140.0" height="238.0"/>
+                <Bounds x="332.0" y="139.0" width="140.0" height="258.0"/>
             </shape>
             <shape elementRef="_1479181849457">
                 <Bounds x="245.0" y="23.0" width="159.0" height="86.0"/>

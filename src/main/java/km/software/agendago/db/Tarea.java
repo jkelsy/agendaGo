@@ -55,6 +55,10 @@ public class Tarea implements Serializable {
     @Basic
     private Date fechaAviso;
 
+    @Column(name = "tar_nombre")
+    @Basic
+    private String nombre;
+
     @ManyToOne(targetEntity = Proyecto.class)
     @JoinColumn(name = "PROYECTO_ID")
     private Proyecto proyecto;
@@ -113,6 +117,14 @@ public class Tarea implements Serializable {
 
     public void setFechaAviso(Date fechaAviso) {
         this.fechaAviso = fechaAviso;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Proyecto getProyecto() {
