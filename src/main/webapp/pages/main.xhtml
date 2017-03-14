@@ -27,11 +27,7 @@
                                     <p:commandButton action="#{agendaController.verTarea(_tarea)}" value="Detalles"/>
                                     #{_tarea.descripcion}
                                 </p:column>
-                                <p:column headerText="Fecha Inicial">
-                                    <h:outputText value="#{_tarea.fechaInicial}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                    </h:outputText> 
-                                </p:column>
+                                
                                 <p:column headerText="Fecha Aviso">
                                     <h:outputText value="#{_tarea.fechaAviso}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>

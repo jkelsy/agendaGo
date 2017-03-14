@@ -39,16 +39,16 @@
                                 <div class="col-lg-4">                        
                                     <label for="fechaFinal">Fecha Agendada</label>                        
                                     <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal">
-                                        <p:ajax event="dateSelect" process="@this" update="panelFechaAviso panelMeses"/>
+                                        <p:ajax event="dateSelect" update="panelFechaAviso panelMeses"/>
                                     </p:calendar>
                                 </div>
                                 <div class="col-lg-4">  
-                                    <p:panelGrid id="panelFechaAviso">
-                                    <p:panelGrid rendered="${tareaController.tarea.fechaFinal != null}">
-                                        <label for="fechaAviso">Fecha Aviso</label>
-                                        <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso" maxdate="#{tareaController.tarea.fechaFinal}"/>
-                                    </p:panelGrid>
-                                    </p:panelGrid>
+                                    <h:panelGrid id="panelFechaAviso">
+                                        <p:panelGrid rendered="${tareaController.tarea.fechaFinal != null}">
+                                            <label for="fechaAviso">Fecha Aviso</label>
+                                            <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso" maxdate="#{tareaController.tarea.fechaFinal}"/>
+                                        </p:panelGrid>
+                                    </h:panelGrid>
                                 </div>                                
                             </div>
                             <div class="row">
