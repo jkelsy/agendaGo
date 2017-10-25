@@ -25,22 +25,32 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <label for="nombre">Nombre</label>
+                                    <p:inputText value="#{tareaController.tarea.nombre}" placeholder="Nombre" id="nombre"/>                       
+                                </div>                    
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
                                     <label for="descripcion">Descripcion</label>
                                     <p:inputTextarea value="#{tareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion"/>                       
                                 </div>                    
                             </div>
                             <div class="row">
+                                
                                 <div class="col-lg-4">                        
-                                    <label for="fechaInicial">Fecha Inicial</label>
-                                    <p:calendar value="#{tareaController.tarea.fechaInicial}" placeholder="Fecha Inicial" id="fechaInicial"  />                                </div>
-                                <div class="col-lg-4">                        
+                                    <label for="fechaFinal">Fecha Agendadal</label>                        
+                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal">
+                                    <p:ajax event="dateSelect" update="panelFechaAviso"/>
+                                    </p:calendar>
+                                </div>
+                                
+                                <div class="col-lg-4">  
+                                    <h:panelGrid id="panelFechaAviso">
                                     <label for="fechaAviso">Fecha Aviso</label>
-                                    <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso"/>
+                                    <p:calendar value="#{tareaController.tarea.fechaAviso}" placeholder="Fecha Aviso" id="fechaAviso" maxdate="#{tareaController.tarea.fechaFinal}"/>
+                                    </h:panelGrid>
                                 </div>
-                                <div class="col-lg-4">                        
-                                    <label for="fechaFinal">Fecha Final</label>                        
-                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal"/>
-                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">

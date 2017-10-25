@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import km.software.agendago.db.Usuario;
 import km.software.agendago.db.service.facade.AgendaFacade;
 import km.software.agendago.db.service.facade.ArchivoFacade;
 import km.software.agendago.db.service.facade.ArchivoHistorialFacade;
+import km.software.agendago.db.service.facade.ArchivoTareaFacade;
 import km.software.agendago.db.service.facade.EstadoTareaFacade;
 import km.software.agendago.db.service.facade.HistorialFacade;
 import km.software.agendago.db.service.facade.ObservacionFacade;
@@ -60,6 +62,11 @@ public class TareaController implements Serializable {
     private String periodo;
     private String observacion;
     private UploadedFile uploadedFile;
+    
+    @Inject 
+    private ArchivoTareaFacade archivoTareaService;
+    private List<Archivo> archivosTemporales;
+    
     
     private boolean[] meses = {false, false, false, false, false, false,
                                false, false, false, false, false, false};
@@ -110,6 +117,8 @@ public class TareaController implements Serializable {
         if(responsables != null && !responsables.isEmpty()){
             responsables.clear();
         }
+        
+        archivosTemporales = new ArrayList<>();
     }
 
     public boolean[] getMeses() {
@@ -237,6 +246,16 @@ public class TareaController implements Serializable {
         historial.setObservacion(tarea.getDescripcion());
         historialService.create(historial);
         
+        //guardar los archivos temporales
+        for (Archivo at : archivosTemporales){
+            ArchivoTarea archivoTarea = new ArchivoTarea();
+            archivoTarea.setArchivo(at);
+            archivoTarea.setTarea(tarea);
+            archivoTarea.setUsuario(agendaService.getUsuarioActual());
+            archivoTarea.setFecha(new java.util.Date());
+            archivoTareaService.create(archivoTarea);
+        }
+        
         String txtResponsables = "";        
         
         for (Usuario usr : responsables) {
@@ -253,7 +272,7 @@ public class TareaController implements Serializable {
             String texto = "<b>AgendaGo</b>";
                 texto += "<br/>Señor: <b>"+usr.getPersona().getNombre() +"</b>";
                 texto += "<br/>Le informamos que tiene una terea asignada";
-                texto += "<br/>Descripcion: "+tarea.getDescripcion();
+                texto += "<br/>Descripción: "+tarea.getDescripcion();
                 texto += "<br/>Fecha Inicial: "+ tarea.getFechaInicial();
                 texto += "<br/>Fecha Final: "+ tarea.getFechaFinal();
                 texto += "<br/>Responsables: "+ txtResponsables;
@@ -329,11 +348,18 @@ public class TareaController implements Serializable {
         return "/pages/main";                
     }   
     
-    public void handleFileUpload(FileUploadEvent event) {
-        UploadedFile file = event.getFile();        
+    public void cargarArchivos(FileUploadEvent event) {
+        UploadedFile file = event.getFile();  
+        
+        //se puede mejorar utilizando el usuario actual,
+        //para evitar la concurrencia
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+        Calendar ahora = Calendar.getInstance();
+        String id = sdf.format(ahora.getTime());
         
         if(file.getContents().length != 0){
-            String ruta = "/home/files/agendaGo/"+file.getFileName().replaceAll(" ", "_");
+            String ruta = "/home/files/agendaGo/"+id+"_"+file.getFileName().replaceAll(" ", "_");
             try(InputStream is = file.getInputstream(); 
                 OutputStream out = new FileOutputStream(new File(ruta))){
                 
@@ -348,16 +374,12 @@ public class TareaController implements Serializable {
             }
             
             Archivo archivo = new Archivo();
-            archivo.setNombre(file.getFileName());
+            archivo.setNombre(id+"_"+file.getFileName().replaceAll(" ", "_"));
             archivo.setExtension(file.getContentType());            
-            archivoService.create(archivo);
-            
-            ArchivoHistorial archivoHistorial = new ArchivoHistorial();
-            archivoHistorial.setHistorial(historial);
-            archivoHistorial.setArchivo(archivo);
-            archivoHistorialService.create(archivoHistorial);            
-        }
-        //application code
+            archivoService.create(archivo);            
+            archivosTemporales.add(archivo);            
+                             
+        }        
     }
     
     public String guardarObservacion(){
@@ -417,7 +439,7 @@ public class TareaController implements Serializable {
          
         for (int i = 0; i < allUsuarios.size(); i++) {
             Usuario usr = allUsuarios.get(i);
-            if(usr.getLogin().toLowerCase().startsWith(query)) {
+            if(usr.getLogin().toLowerCase().startsWith(query.toLowerCase())) {
                 filteredUsuarios.add(usr);
             }
         }         

@@ -33,13 +33,10 @@
                                         <dt>Estado</dt>
                                         <dd>#{tareaController.tarea.estado.nombre}</dd>
                                         
-                                        <dt>Fecha Inicial</dt>
-                                        <dd>#{tareaController.tarea.fechaInicial}</dd>
-                                        
                                         <dt>Fecha Aviso</dt>
                                         <dd>#{tareaController.tarea.fechaAviso}</dd>
                                         
-                                        <dt>Fecha Final</dt>
+                                        <dt>Fecha Agendada</dt>
                                         <dd>#{tareaController.tarea.fechaFinal}</dd>                                   
                                         
                                         <dt>Responsables</dt>
@@ -51,7 +48,7 @@
                                         <dt>Archivos</dt>
                                         <dd>
                                             <ui:repeat value="#{tareaController.archivos}" var="_archivoTarea">                                        
-                                                <p:link target="_blank" href="http://localhost:8080/archivos/agendaGo/#{_archivoTarea.archivo.nombre}">#{_archivoTarea.archivo.nombre}</p:link>, 
+                                                <p:link target="_blank" href="http://#{request.serverName}:#{request.serverPort}/archivos/agendaGo/#{_archivoTarea.archivo.nombre}">#{_archivoTarea.archivo.nombre}</p:link>, 
                                             </ui:repeat>
                                         </dd>
                                         

@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author jkelsy
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findByLogin", query = "Select u from Usuario u where u.login=:login")
     ,@NamedQuery(name = "Usuario.findByID", query = "Select e from Usuario e where e.id = :ID")})
+@XmlRootElement
 public class Usuario implements Serializable {
 
     @Id

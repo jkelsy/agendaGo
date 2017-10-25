@@ -11,12 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author jkelsy
  */
 @Entity(name = "Persona")
 @Table(name = "persona")
+@XmlRootElement
 public class Persona implements Serializable {
 
     @Id

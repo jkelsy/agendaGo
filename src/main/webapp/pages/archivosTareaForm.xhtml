@@ -19,9 +19,7 @@
                     <p:growl id="messages" showDetail="true" />
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <div class="panel-title">
-                                Cargar Archivos
-                            </div>
+                            <div class="panel-title">Cargar Archivos</div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -30,11 +28,7 @@
                                     <p:inputTextarea value="#{archivosTareaController.tarea.descripcion}" placeholder="Descripcion" id="descripcion" disabled="true" />                       
                                 </div>                    
                             </div>
-                            <div class="row">
-                                <div class="col-lg-4">                        
-                                    <label for="fechaInicial">Fecha Inicial</label>
-                                    <p:calendar value="#{archivosTareaController.tarea.fechaInicial}" placeholder="Fecha Inicial" id="fechaInicial" disabled="true"/>
-                                </div>
+                            <div class="row">                                
                                 <div class="col-lg-4">                        
                                     <label for="fechaAviso">Fecha Aviso</label>
                                     <p:calendar value="#{archivosTareaController.tarea.fechaAviso}" placeholder="Fecha Inicial" id="fechaAviso" disabled="true"/>
@@ -54,7 +48,7 @@
                                     #{_archivo.archivo.extension}
                                 </p:column>
                                 <p:column headerText="...">
-                                    <p:button href="http://localhost:8080/archivos/agendaGo/#{_archivo.archivo.nombre}" target="_blank" value="Ver" icon="fa fa-eye"/>
+                                    <p:button href="http://#{request.serverName}:#{request.serverPort}/archivos/agendaGo/#{_archivo.archivo.nombre}" target="_blank" value="Ver" icon="fa fa-eye"/>
                                 </p:column>
                                 <p:column headerText="...">
                                     <p:commandButton action="#{archivosTareaController.eliminarArchivo(_archivo)}" update="fArchivoTarea" value="Eliminar" icon="fa fa-remove" />
@@ -62,7 +56,7 @@
                             </p:dataTable>
                             
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12">                                    
                                     <p:fileUpload fileUploadListener="#{archivosTareaController.handleFileUpload}" skinSimple="true" update="fArchivoTarea" />
                                 </div>
                             </div>

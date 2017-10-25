@@ -12,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author jkelsy
  */
 @Entity(name = "Proyecto")
 @Table(name = "proyecto")
+@XmlRootElement
 public class Proyecto implements Serializable {
 
     @Id

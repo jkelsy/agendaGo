@@ -12,11 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author jkelsy
@@ -27,6 +29,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Tarea.findByEstadoID", query = "Select e from Tarea e where e.estado.id = :estadoID")
     ,@NamedQuery(name = "Tarea.findSinFinalizarByUsuario", query = "Select e.tarea from Responsable e where e.tarea.estado.nombre != 'FINALIZADA' and e.usuario.login = :login")
     ,@NamedQuery(name = "Tarea.findAllByResponsable", query = "Select e.tarea from Responsable e where e.usuario.id = :usuarioId")})
+@XmlRootElement
 public class Tarea implements Serializable {
 
     @Id
@@ -38,9 +41,10 @@ public class Tarea implements Serializable {
     @NotNull
     private Date fechaInicial;
 
-    @Column(name = "tar_descripcion")
+    @Lob
+    @Column(name = "tar_descripcion", length = Integer.MAX_VALUE)
     @Basic
-    @NotNull
+    @NotNull    
     private String descripcion;
 
     @Column(name = "tar_fecha_final")

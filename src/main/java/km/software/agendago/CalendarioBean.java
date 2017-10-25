@@ -3,7 +3,9 @@ package km.software.agendago;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import km.software.agendago.db.Tarea;
+import km.software.agendago.db.service.facade.AgendaFacade;
 import km.software.agendago.db.service.facade.TareaFacade;
  
 import org.primefaces.event.ScheduleEntryMoveEvent;
@@ -27,35 +30,28 @@ import org.primefaces.model.ScheduleModel;
 @ViewScoped
 public class CalendarioBean implements Serializable {
  
-    private ScheduleModel eventModel;
- 
-    private ScheduleEvent event = new DefaultScheduleEvent();
-    
-    @Inject
-    private TareaFacade tareaService;   
+    private ScheduleModel eventModel; 
+    private ScheduleEvent event = new DefaultScheduleEvent();    
+    @Inject private TareaFacade tareaService;   
+    @Inject private AgendaFacade agendaService; 
  
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
-        
-        List<Tarea> tareas = tareaService.findAll();
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("usuarioId", agendaService.getUsuarioActual().getId());        
+        List<Tarea> tareas = tareaService.findByNamedQuery("Tarea.findAllByResponsable", parameters);
         
         for(Tarea tareaInstance: tareas){
-            
             DefaultScheduleEvent evento = new DefaultScheduleEvent();
             evento.setData(tareaInstance);
-            
             evento.setTitle(tareaInstance.getDescripcion());
             evento.setDescription(tareaInstance.getDescripcion());
             evento.setStartDate(tareaInstance.getFechaFinal());
             evento.setEndDate(tareaInstance.getFechaFinal());
-            evento.setStyleClass(tareaInstance.getEstado().getNombre());
-            
+            evento.setStyleClass(tareaInstance.getEstado().getNombre());            
             eventModel.addEvent(evento);
-            
-            
         }
-       
     }
      
     public Date getInitialDate() {

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author jkelsy
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "estado_tarea")
 @NamedQuery(name = "EstadoTarea.findByNombre", query = "Select e from EstadoTarea e where e.nombre=:nombre")
+@XmlRootElement
 public class EstadoTarea implements Serializable {
 
     @Id

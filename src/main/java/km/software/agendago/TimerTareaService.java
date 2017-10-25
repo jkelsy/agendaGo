@@ -81,12 +81,12 @@ public class TimerTareaService {
             for(Responsable _res: responsables){
                 String texto = "<b>AgendaGo</b>";
                 texto += "<br/>Señor: <b>"+_res.getUsuario().getPersona().getNombre() +"</b>";
-                texto += "<br/>Le informamos que tiene una terea por vencerse en la fecha: <b>"+_tarea.getFechaFinal()+"</b>";
-                texto += "<br/>Descripcion: "+_tarea.getDescripcion();
+                texto += "<br/>Le informamos que tiene una tarea por vencerse en la fecha: <b>"+_tarea.getFechaFinal()+"</b>";
+                texto += "<br/>Descripción: "+_tarea.getDescripcion();
                 texto += "<br/>Responsables: "+ txtResponsables;
                 texto += "<br/>Creador: "+_tarea.getCreador().getLogin();
-                
-                emailService.sendEmail(_res.getUsuario().getPersona().getEmail(), 
+                //_res.getUsuario().getPersona().getEmail()
+                emailService.sendEmail("jkelsy@gmail.com", 
                         "agendagoj2km@gmail.com", 
                         "AgendaGo, tarea por vencerse", texto);
             }            
@@ -107,12 +107,13 @@ public class TimerTareaService {
             for(Responsable _res: responsables){
                 String texto = "<b>AgendaGo</b>";
                 texto += "<br/>Señor: <b>"+_res.getUsuario().getPersona().getNombre() +"</b>";
-                texto += "<br/>Le informamos que tiene una terea vencida en la fecha: <b>"+_tarea.getFechaFinal()+"</b>";
-                texto += "<br/>Descripcion: "+_tarea.getDescripcion();
+                texto += "<br/>Le informamos que tiene una tarea vencida en la fecha: <b>"+_tarea.getFechaFinal()+"</b>";
+                texto += "<br/>Descripción: "+_tarea.getDescripcion();
                 texto += "<br/>Responsables: "+ txtResponsables;
                 texto += "<br/>Creador: "+_tarea.getCreador().getLogin();
                 
-                emailService.sendEmail(_res.getUsuario().getPersona().getEmail(), 
+                //_res.getUsuario().getPersona().getEmail()
+                emailService.sendEmail("jkelsy@gmail.com", 
                         "agendagoj2km@gmail.com", 
                         "AgendaGo, tarea vencida", texto);
             }            

@@ -91,11 +91,15 @@ public class FinalizarTareaController implements Serializable {
         for (Usuario usr : responsables) {
             String texto = "<b>AgendaGo</b>";
                 texto += "<br/>Señor: <b>"+usr.getPersona().getNombre() +"</b>";
-                texto += "<br/>Le informamos que tiene una terea finalizada";
-                texto += "<br/>Descripcion: "+tarea.getDescripcion();
+                texto += "<br/>Le informamos que tiene una tarea finalizada";
+                texto += "<br/>Descripción: "+tarea.getDescripcion();
                 texto += "<br/>Fecha Inicial: "+ tarea.getFechaInicial();
                 texto += "<br/>Fecha Final: "+ tarea.getFechaFinal();                
                 texto += "<br/>Creador: "+tarea.getCreador().getLogin();
+                texto += "<br/><hr/>";
+                texto += "<br/>Fecha Finalizada: "+historico.getFecha();
+                texto += "<br/>Observaciones: "+historico.getObservacion();
+                texto += "<br/>Finalizado por: "+historico.getUsuario().getLogin();
                 
                 emailService.sendEmail(usr.getPersona().getEmail(), 
                         "agendagoj2km@gmail.com", 

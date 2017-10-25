@@ -38,7 +38,7 @@
                             <div class="row"> 
                                 <div class="col-lg-4">                        
                                     <label for="fechaFinal">Fecha Agendada</label>                        
-                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Final" id="fechaFinal">
+                                    <p:calendar value="#{tareaController.tarea.fechaFinal}" placeholder="Fecha Agendada" id="fechaFinal">
                                         <p:ajax event="dateSelect" update="panelFechaAviso panelMeses"/>
                                     </p:calendar>
                                 </div>
@@ -64,8 +64,16 @@
                                     </p:autoComplete>
                                 </div>
                             </div>
+                            <div class="row">                                
+                                <div class="col-lg-12">
+                                    <p:outputLabel value="Archivos:"/>
+                                    <p:fileUpload fileUploadListener="#{tareaController.cargarArchivos}" 
+                                                  label="Selecciona el archivo" uploadLabel="Subir archivo"
+                                                  multiple="true"/>
+                                </div>
+                            </div>                            
                             
-                            <div>
+                            <div class="row">
                                 <div>
                                     <p:panelGrid columns="12" layout="grid" id="panelMeses">
                                         <p:panelGrid rendered="#{tareaController.tarea.fechaFinal.month lt 0}">

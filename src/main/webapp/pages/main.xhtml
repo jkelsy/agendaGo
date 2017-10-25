@@ -21,57 +21,75 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <p:dataTable value="#{agendaFacade.findTareasSinFinalizarByUsuarioActual()}" var="_tarea" id="tablaTareas" 
-                                         rowStyleClass="#{_tarea.estado.nombre}" widgetVar="tablaTareas">
-                                <p:column headerText="Descripcion">
-                                    <p:commandButton action="#{agendaController.verTarea(_tarea)}" value="Detalles"/>
-                                    #{_tarea.descripcion}
+                            <p:dataTable value="#{agendaFacade.findTareasSinFinalizarByUsuarioActual()}" 
+                                         var="_tarea" id="tablaTareas" rowStyleClass="#{_tarea.estado.nombre}" 
+                                         reflow="true" widgetVar="tablaTareas">
+                                <p:column headerText="Descripcion"> 
+                                    <b>#{_tarea.nombre}</b><br/>
+                                    #{_tarea.descripcion}                                    
+                                    <br/><b>Estado: </b>
+                                    #{_tarea.estado.nombre}
                                 </p:column>
                                 
-                                <p:column headerText="Fecha Aviso">
+                                <p:column headerText="Archivos y Observaciones">
+                                    <br/><b>Archivos:</b><br/>
+                                    <ui:repeat value="#{agendaFacade.findArchivosByTarea(_tarea.id)}" var="_archivoTarea">                                        
+                                        <p:link target="_blank" href="http://#{request.serverName}:#{request.serverPort}/archivos/agendaGo/#{_archivoTarea.archivo.nombre}">#{_archivoTarea.archivo.nombre}</p:link>, 
+                                    </ui:repeat> 
+                                    
+                                    <br/><b>Observaciones:</b><br/>
+                                    <ui:repeat value="#{agendaFacade.findObservacionByTarea(_tarea.id)}" var="_observacion">                                        
+                                            <h:outputText value="#{_observacion.fecha}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                            #{_observacion.usuario.login} :                                        
+                                        #{_observacion.texto} 
+                                        <br/>
+                                    </ui:repeat>
+                                </p:column>
+                                
+                                <p:column headerText="Fechas">
+                                    <b>Fecha Aviso:</b>
                                     <h:outputText value="#{_tarea.fechaAviso}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </h:outputText> 
-                                </p:column>
-                                <p:column headerText="Fecha Final">
+                                    <br/><b>Fecha Agendada:</b>
                                     <h:outputText value="#{_tarea.fechaFinal}">
                                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </h:outputText> 
                                 </p:column>
+                               
                                 <p:column headerText="Responsables">
                                     <ui:repeat value="#{agendaFacade.findResponsablesByTarea(_tarea.id)}" var="_responsable">
                                         #{_responsable.usuario.login},
                                     </ui:repeat>                                        
-                                </p:column>
-                                <p:column headerText="Observaciones">
-                                    <p:commandButton action="#{agendaController.observacionTarea(_tarea)}" value="Agregar"/>
-                                    <ui:repeat value="#{agendaFacade.findObservacionByTarea(_tarea.id)}" var="_observacion">
-                                        <hr/>
-                                        <b>
-                                            <h:outputText value="#{_observacion.fecha}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                                </h:outputText>
-                                            #{_observacion.usuario.login} :</b>
-                                        <br/>
-                                        #{_observacion.texto} 
-                                    </ui:repeat>                                        
-                                </p:column>
-                                <p:column headerText="Estado">
-                                    #{_tarea.estado.nombre}
-                                </p:column>                                                                
-                                <p:column headerText="Archivos">
-                                    <p:commandButton action="#{agendaController.archivosTarea(_tarea)}" value="Agregar"/>
-                                    <ui:repeat value="#{agendaFacade.findArchivosByTarea(_tarea.id)}" var="_archivoTarea">
+                                </p:column>                                
+                            
+                                <p:column headerText="Opciones">
+                                    <h:panelGroup >
+                                        <p:commandButton icon="fa fa-fw fa-search"
+                                                         action="#{agendaController.verTarea(_tarea)}" 
+                                                         title="Ver"/>
                                         
-                                        <p:link target="_blank" href="http://localhost:8080/archivos/agendaGo/#{_archivoTarea.archivo.nombre}">#{_archivoTarea.archivo.nombre}</p:link>, 
-                                    </ui:repeat>                                     
-                                </p:column>   
-                                <p:column headerText="Editar">
-                                    <p:commandButton action="#{agendaController.seleccionarTarea(_tarea)}" value="Editar"/>                                    
+                                        <p:commandButton icon="fa fa-fw fa-comments-o" 
+                                                         action="#{agendaController.observacionTarea(_tarea)}" 
+                                                         title="Observaciones"/>
+                                        
+                                        <p:commandButton icon="fa fa-fw fa-file-text-o" 
+                                                         action="#{agendaController.archivosTarea(_tarea)}" 
+                                                         title="Archivos"/>
+                                        
+                                        <p:commandButton icon="fa fa-fw fa-pencil" 
+                                                         action="#{agendaController.seleccionarTarea(_tarea)}" 
+                                                         title="Editar"/> 
+                                        
+                                        <p:commandButton icon="fa fa-fw fa-check" 
+                                                         action="#{agendaController.finalizarTarea(_tarea)}" 
+                                                         title="Finalizar"/>
+                                        
+                                    </h:panelGroup>
                                 </p:column>
-                                <p:column headerText="Finalizar">
-                                    <p:commandButton action="#{agendaController.finalizarTarea(_tarea)}" value="Finalizar"/>
-                                </p:column>
+                                
                             </p:dataTable>
                         </div>
                     </div>

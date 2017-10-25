@@ -35,9 +35,9 @@ public class UsuarioConverter implements Converter{
         
         if(value != null && value.trim().length() > 0) {
             try {
-                UsuarioFacade usuarioService= fc.getCurrentInstance().getApplication().evaluateExpressionGet(fc, "#{usuario}", UsuarioFacade.class);
+                UsuarioFacade usuarioService = fc.getCurrentInstance().getApplication().evaluateExpressionGet(fc, "#{usuario}", UsuarioFacade.class);
                 System.out.println("++++++"+usuarioService);
-                Usuario usr= usuarioService.find(Long.parseLong(value));
+                Usuario usr = usuarioService.find(Long.parseLong(value));
                 return usr;
             } catch(NumberFormatException e) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid usuario."));
