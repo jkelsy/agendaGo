@@ -58,7 +58,8 @@ public class TimerTareaService {
     
     //Datos para enviar correo
     //Correo: agendagoj2km@gmail.com
-    //Contraseña: 4g3nd4g0j2km    
+    //Contraseña: 4g3nd4g0j2km
+    //Contraseña: Granalianza*.#
     @Schedule(second="0", minute="30", hour="8,14", persistent = true)
     //@Schedule(second="0", minute="*/3", hour="*", persistent = true)
     public void enviarEmails(){
